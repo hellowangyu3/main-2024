@@ -1,0 +1,95 @@
+1.安装sqlite3数据库
+	1.1 在线安装
+		sudo apt-get install sqlite3
+	1.2 离线安装
+		sudo dpkg -i *.deb
+
+2.验证是否安装成功sqlite3数据库
+	$ sqlite3
+	显示sqlite3的版本号SQLite version 3.6.16
+		SQLite version 3.6.16
+		Enter ".help" for instructions
+		Enter SQL statements terminated with a ";"
+
+3.数据库系统指令
+	1:   	.help	帮助指令
+	2:	.quit	退出指令
+	3:	.tables	显示当前数据库中有那些表
+	4:	.schema 查看数据库表结构
+	
+
+4.数据库的SQL指令，通常使用分号结尾（语法不区分大小写）
+	1:	create table	表名称(列参数类型 列参数名称 );		创建表
+		例如:创建一个学生数据表(学号 integer,姓名 char,年龄 integer)
+			create table student(学号 integer,姓名 char,年龄 integer);
+
+			主键:这表表中唯一的标识,通常情况是学号或者身份证号，不允许重复，不允许为NULL
+			primary key not NULL
+		例如创建的时候增加学号为主键
+			create table student(学号 integer primary key not null,姓名 char,年龄 integer);
+
+
+	2.1	全部增加数据
+			insert into 表名 values(列值1，列值2，列值3);
+				例如：插入学生数据(学号 = 10000,姓名 = '张三',年龄 = 18);
+					insert into student values(10000,'张三',18);
+					insert into student values(10001,'李四',18);
+					insert into student values(10002,'王五',12);
+					insert into student values(10003,'赵六',17);
+	2.2 	部分增加数据：insert into 表名称 (列字段1,列字段2,....)values(列数据1,列数据2...)；
+					insert into student (学号,姓名)values(10005,'李四');
+	3.1 遍历全部显示	*通配符
+		select * from 表名称;
+	3.2 按条件显示 where (变量表达式)
+		3.2.1 按单独条件
+		select * from student where 姓名 = '张三';
+		select * from student where 学号 >= 10002;
+		
+		3.2.2 按逻辑表达式条件and 和 or
+		select * from student where 学号 >= 10002 and 年龄 < 17;
+		select * from student where 学号 >= 10002 or 年龄 > 18;
+
+	4.1 修改数据:update 表名称 set 字段 = 值 where 条件
+			例如单值:$ update student set 年龄 = 18 where 学号 = 10005;
+			例如多值:$ update student set 年龄 = 20,姓名 = '小明' where 学号 = 10005;
+
+	5.1 删除数据库表
+		drop table 表名称
+
+	6.1 删除指定数据:$ delete from 表名称 where 条件表达式
+		delete from student where 年龄 > 1;
+		delete from student where 学号 = 10001;
+
+	7.1排序:$ ORDER BY 
+		升序:ASC
+		降序:DESC
+		操作结构:select * from 表名称 order by 字段 升序/降序
+		
+		例如:年龄升序
+			select * from student order by 年龄 ASC;
+		例如:年龄降序
+			select * from student order by 年龄 DESC;
+	
+	8.1 去重显示:$ distinct
+		操作结构:select * from 表名称 distinct 字段 FROM COMPANY;
+		例如去除年龄重复字段多余信息
+			SELECT DISTINCT 年龄 FROM student;
+
+		
+
+4.创建数据库
+	$ sqlite3 数据库名称.db
+		例如:$ sqlite3 student.db	# 创建一个学生数据库
+
+n.问题集合
+	n.1安装的时候无法定位到软件包怎么解决?
+		答：更新软件资源:系统设置->软件和更新->Ubuntu软件->下载自{其他站点}->中国任意网址
+	
+	n.2安装的时候显示已经上锁怎么解决？
+		答：重启虚拟机（其他程序暂用，没有主动解锁，形成死锁）
+
+
+
+
+
+

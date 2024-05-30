@@ -1,0 +1,9 @@
+1.打开/创建 数据库：sqlite3_open
+	sqlite3_open(const char *filename, sqlite3 **ppDb)
+	参数:
+		const char *filename:数据库名称
+		sqlite3 **ppDb:数据库句柄(包含着各式各样的操作)
+2.操作数据库：sqlite3_exec
+	sqlite3_exec(sqlite3*, const char *sql, sqlite_callback, void *data, char **errmsg)
+
+3.关闭数据库

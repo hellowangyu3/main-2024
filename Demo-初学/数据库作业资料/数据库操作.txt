@@ -1,0 +1,20 @@
+/************ 创建数据库表 ****************/
+create table student(学号 integer primary key,
+					    密码 char not null,
+					    姓名 char not null,
+					    年龄 integer default 0,
+					    班级 integer default 0,
+					    手机号码 integer unique,
+					    数学成绩 integer default 0,
+					    英语成绩 integer default 0,
+					    总分 integer default 0);
+
+/*********** 插入数据  *****************/
+//1.插入全部
+insert into student values(10000,'123456','张三',18,1,18708540625,1,1,2);
+//2.插入部分
+insert into student (密码,姓名,手机号码)values('123456','李四',18708540628);
+/********** 显示全部 *******************/
+select * from student;
+
+
